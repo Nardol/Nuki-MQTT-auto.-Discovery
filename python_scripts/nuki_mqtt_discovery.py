@@ -102,11 +102,9 @@ def get_lock_payload(device_id, device_name, device_model, name):
     'payload_open': str(ACTION_UNLATCH),
     'state_topic': get_topic(device_id, TOPIC_STATE),
     'state_locked': str(STATE_LOCKED),
-    'state_locking': str(STATE_LOCKing),
+    'state_locking': str(STATE_LOCKING),
     'state_unlocked': str(STATE_UNLOCKED),
     'state_unlocking': str(STATE_UNLOCKING),
-    'state_opening': str(STATE_UNLATCHING),
-    'state_open': str(STATE_UNLATCHED),
     'value_template': '{% if value == \'\'' + str(STATE_UNLOCKED_LOCKNGO) + '\'\'%}' + str(STATE_UNLOCKED) + '{% else %}{{value}}{% endif %}'
   })
 
@@ -174,7 +172,7 @@ def get_door_sensor_battery_critical_payload(device_id, device_name, device_mode
     'unique_id': device_id+"_door_sensor_battery_critical",
     'device_class': 'battery',
     'entity_category': 'diagnostic',
-    'state_topic': get_topic(device_id, TOPIC_DOOR_SENSOR_BATTERY_CRITiCAL),
+    'state_topic': get_topic(device_id, TOPIC_DOOR_SENSOR_BATTERY_CRITICAL),
     'payload_off': 'false',
     'payload_on': 'true'
   })
