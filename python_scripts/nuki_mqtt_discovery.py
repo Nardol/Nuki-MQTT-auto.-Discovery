@@ -31,6 +31,7 @@ STATE_UNLOCKED_LOCKNGO = 6
 STATE_UNLATCHING = 7
 STATE_MOTOR_BLOCKED = 254
 STATE_UNDEFINED = 255
+STATE_UNLOCKED_COMBINED = f"(''{STATE_UNLATCHED}'',''{STATE_UNLOCKED_LOCKNGO}'',''{STATE_UNLATCHING}'')"
 
 # Lock actions
 ACTION_UNLOCK = 1
@@ -106,7 +107,7 @@ def get_lock_payload(device_id, device_name, device_model, name):
     'state_unlocked': str(STATE_UNLOCKED),
     'state_unlocking': str(STATE_UNLOCKING),
     'state_jammed': str(STATE_MOTOR_BLOCKED),
-    'value_template': '{% if value == \'\'' + str(STATE_UNLOCKED_LOCKNGO) + '\'\'%}' + str(STATE_UNLOCKED) + '{% else %}{{value}}{% endif %}'
+    'value_template': '{% if value in '+STATE_UNLOCKED_COMBINED+'%}' + str(STATE_UNLOCKED) + '{% else %}{{value}}{% endif %}'
   })
 
 
