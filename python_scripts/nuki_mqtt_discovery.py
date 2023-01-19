@@ -105,6 +105,7 @@ def get_lock_payload(device_id, device_name, device_model, name):
     'state_locking': str(STATE_LOCKING),
     'state_unlocked': str(STATE_UNLOCKED),
     'state_unlocking': str(STATE_UNLOCKING),
+    'state_jammed': str(STATE_MOTOR_BLOCKED),
     'value_template': '{% if value == \'\'' + str(STATE_UNLOCKED_LOCKNGO) + '\'\'%}' + str(STATE_UNLOCKED) + '{% else %}{{value}}{% endif %}'
   })
 
