@@ -244,7 +244,7 @@ def main(hass, data):
     get_lock_payload(device_id, device_name, device_model, name))
 
   # Battery critical
-  name = device_name + " Battery Critical"
+  name = device_name + " Battery critical"
   publish(hass, get_discovery_topic(discovery_topic, "binary_sensor", device_id, "lock_battery_critical"), 
     get_battery_critical_payload(device_id, device_name, device_model, name))
 
@@ -254,24 +254,24 @@ def main(hass, data):
     get_battery_charge_state_payload(device_id, device_name, device_model, name))
 
   # Battery charging
-  name = device_name + " Battery Charging"
+  name = device_name + " Battery charging"
   publish(hass, get_discovery_topic(discovery_topic, "binary_sensor", device_id, "battery_charging"),
     get_battery_charging_payload(device_id, device_name, device_model, name))
 
   if door_sensor_available:
     # Door sensor
-    name = device_name + " Door Sensor"
+    name = device_name + " Door sensor"
     publish(hass, get_discovery_topic(discovery_topic, "binary_sensor", device_id, "door_sensor"),
       get_door_sensor_payload(device_id, device_name, device_model, name))
 
     # Door sensor battery critical
-    name = device_name + " Door Sensor Battery Critical"
+    name = device_name + " Door sensor battery critical"
     publish(hass, get_discovery_topic(discovery_topic, "binary_sensor", device_id, "door_sensor_battery_critical"), 
       get_door_sensor_battery_critical_payload(device_id, device_name, device_model, name))
 
   if keypad_available:
     # Keypad battery critical
-    name = device_name + " Keypad Battery Critical"
+    name = device_name + " Keypad battery critical"
     publish(hass, get_discovery_topic(discovery_topic, "binary_sensor", device_id, "keypad_battery_critical"), 
       get_keypad_battery_critical_payload(device_id, device_name, device_model, name))
 
@@ -282,11 +282,11 @@ def main(hass, data):
 
   # Lock'n'Go button
   name = device_name + " Lock-n-Go"
-  publish(hass, get_discovery_topic(discovery_topic, "button", device_id, "unlatch_button"),
+  publish(hass, get_discovery_topic(discovery_topic, "button", device_id, "lockngo_button"),
     get_button_payload(device_id, device_name, device_model, name, ACTION_LOCKNGO, "lock_n_go"))
 
   # Lock'n'Go with unlatch button
-  name = device_name + " Lock-n-Go With Unlatch"
+  name = device_name + " Lock-n-Go with unlatch"
   publish(hass, get_discovery_topic(discovery_topic, "button", device_id, "lock_n_go_unlatch"),
     get_button_payload(device_id, device_name, device_model, name, ACTION_LOCKNGO_UNLATCH, "lock_n_go_unlatch"))
 
