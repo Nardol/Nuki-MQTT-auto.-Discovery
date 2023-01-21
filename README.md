@@ -1,5 +1,7 @@
 # Nuki MQTT auto. Discovery
 
+This repository is a fork of [MattDog06/Nuki-MQTT-auto.-Discovery](https://github.com/MattDog06/Nuki-MQTT-auto.-Discovery)
+
 [![hass_badge](https://img.shields.io/badge/Platform-Home%20Assistant-blue.svg)](https://www.home-assistant.io)
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-orange.svg)](https://github.com/hacs/integration)
 
@@ -35,3 +37,14 @@ data:
 
 ### Home Assistant Device
 ![Sample](homeassistant_device.png)
+
+## Differences with original script
+* The smartlock ID is used for entity unique IDs instead of the name which could be changed
+Using this method, if the smartlock is renamed in the Nuki app, the existing entities will be updated instead of create new entities
+* Node ID is not used anymore for MQTT topics
+* Locking, unlocking and jammed states are implemented. This change should be visible from Home Assistant 2023.2
+* Open and opening states are removed, these don't exist in Home Assistant for lock entities
+* If the smartlock is unlatching or unlatched, state will be unlocked, the smartlock cannot technically be unlatching or unlatched if it is open so these states are same
+* Apply conventional namming for entities, for example the door sensor of the smartlock Front door will be named Front door Door sensor instead of Front door Door Sensor
+* In `python_scripts` directory, there is now a script to remove original device and entities.
+It uses the same parameters you used to add the smartlock entities, `nuki_remove_old` has to be used instead of `nuki_mqtt_discovery` when calling the service
