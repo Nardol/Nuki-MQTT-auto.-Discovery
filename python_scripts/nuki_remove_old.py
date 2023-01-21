@@ -97,4 +97,4 @@ def main(hass, data):
   publish(hass, get_discovery_topic(discovery_topic, "button", device_id, name), "")
 
 
-#main(hass, data)
+main(hass, data)
