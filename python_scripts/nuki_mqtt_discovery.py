@@ -66,142 +66,160 @@ def get_discovery_topic(discovery_topic, component, node_id, name):
   return discovery_topic + "/" + component + "/" + node_id + "_" + name + "/config"
 
 
-def get_topic(device_id, topic):
-  return TOPIC_BASE + "/" + device_id + "/" + topic
+def get_base_topic(device_id):
+  return TOPIC_BASE + "/" + device_id
 
 
-def get_availability(device_id):
-  return [
-    {
-      'topic': get_topic(device_id, TOPIC_CONNECTED),
-      'payload_available': 'true',
-      'payload_not_available': 'false'
-    }
-  ]
+def get_topic(topic):
+  return "~/"+topic
 
 
 def get_device(device_id, device_name, device_model):
   return {
-    'identifiers': [
+    'ids': [
         device_id
     ],
-    'manufacturer': 'Nuki',
+    'mf': 'Nuki',
     'name': device_name,
-    'model': device_model
+    'mdl': device_model
   }
 
 
 def get_lock_payload(device_id, device_name, device_model, name):
   return to_json({
-    'availability': get_availability(device_id),
-    'device': get_device(device_id, device_name, device_model),
+    '~': get_base_topic(device_id),
+    'avty_t': get_topic(TOPIC_CONNECTED),
+    'pl_avail': 'true',
+    'pl_not_avail': 'false',
+    'dev': get_device(device_id, device_name, device_model),
     'name': name,
-    'unique_id': device_id+"_lock",
-    'command_topic': get_topic(device_id, TOPIC_LOCK_ACTION),
-    'payload_lock': str(ACTION_LOCK),
-    'payload_unlock': str(ACTION_UNLOCK),
-    'payload_open': str(ACTION_UNLATCH),
-    'state_topic': get_topic(device_id, TOPIC_STATE),
-    'state_locked': str(STATE_LOCKED),
-    'state_locking': str(STATE_LOCKING),
-    'state_unlocked': str(STATE_UNLOCKED),
-    'state_unlocking': str(STATE_UNLOCKING),
-    'state_jammed': str(STATE_MOTOR_BLOCKED),
-    'value_template': '{% if value in '+STATE_UNLOCKED_COMBINED+'%}' + str(STATE_UNLOCKED) + '{% else %}{{value}}{% endif %}'
+    'uniq_id': device_id+"_lock",
+    'cmd_t': get_topic(TOPIC_LOCK_ACTION),
+    'pl_lock': str(ACTION_LOCK),
+    'pl_unlk': str(ACTION_UNLOCK),
+    'pl_open': str(ACTION_UNLATCH),
+    'stat_t': get_topic(TOPIC_STATE),
+    'stat_locked': str(STATE_LOCKED),
+    'stat_locking': str(STATE_LOCKING),
+    'stat_unlocked': str(STATE_UNLOCKED),
+    'stat_unlocking': str(STATE_UNLOCKING),
+    'stat_jam': str(STATE_MOTOR_BLOCKED),
+    'val_tpl': '{% if value in '+STATE_UNLOCKED_COMBINED+'%}' + str(STATE_UNLOCKED) + '{% else %}{{value}}{% endif %}'
   })
 
 
 def get_battery_critical_payload(device_id, device_name, device_model, name):
   return to_json({
-    'availability': get_availability(device_id),
-    'device': get_device(device_id, device_name, device_model),
+    '~': get_base_topic(device_id),
+    'avty_t': get_topic(TOPIC_CONNECTED),
+    'pl_avail': 'true',
+    'pl_not_avail': 'false',
+    'dev': get_device(device_id, device_name, device_model),
     'name': name,
-    'unique_id': device_id+"_lock_battery_critical",
-    'device_class': 'battery',
-    'entity_category': 'diagnostic',
-    'state_topic': get_topic(device_id, TOPIC_BATTERY_CRITICAL),
-    'payload_off': 'false',
-    'payload_on': 'true'
+    'uniq_id': device_id+"_lock_battery_critical",
+    'dev_cla': 'battery',
+    'ent_cat': 'diagnostic',
+    'stat_t': get_topic(TOPIC_BATTERY_CRITICAL),
+    'pl_off': 'false',
+    'pl_on': 'true'
   })
 
 
 def get_battery_charge_state_payload(device_id, device_name, device_model, name):
   return to_json({
-    'availability': get_availability(device_id),
-    'device': get_device(device_id, device_name, device_model),
+    '~': get_base_topic(device_id),
+    'avty_t': get_topic(TOPIC_CONNECTED),
+    'pl_avail': 'true',
+    'pl_not_avail': 'false',
+    'dev': get_device(device_id, device_name, device_model),
     'name': name,
-    'unique_id': device_id+"_lock_battery_percent",
-    'device_class': 'battery',
-    'entity_category': 'diagnostic',
-    'state_topic': get_topic(device_id, TOPIC_BATTERY_CHARGE_STATE),
-    'state_class': 'measurement',
-    'unit_of_measurement': '%'
+    'uniq_id': device_id+"_lock_battery_percent",
+    'dev_cla': 'battery',
+    'ent_cat': 'diagnostic',
+    'stat_t': get_topic(TOPIC_BATTERY_CHARGE_STATE),
+    'stat_cla': 'measurement',
+    'unit_of_meas': '%'
   })
 
 
 def get_battery_charging_payload(device_id, device_name, device_model, name):
   return to_json({
-    'availability': get_availability(device_id),
-    'device': get_device(device_id, device_name, device_model),
+    '~': get_base_topic(device_id),
+    'avty_t': get_topic(TOPIC_CONNECTED),
+    'pl_avail': 'true',
+    'pl_not_avail': 'false',
+    'dev': get_device(device_id, device_name, device_model),
     'name': name,
-    'unique_id': device_id+"_battery_charging",
-    'device_class': 'battery_charging',
-    'entity_category': 'diagnostic',
-    'state_topic': get_topic(device_id, TOPIC_BATTERY_CHARGING),
-    'payload_off': 'false',
-    'payload_on': 'true'
+    'uniq_id': device_id+"_battery_charging",
+    'dev_cla': 'battery_charging',
+    'ent_cat': 'diagnostic',
+    'stat_t': get_topic(TOPIC_BATTERY_CHARGING),
+    'pl_off': 'false',
+    'pl_on': 'true'
   })
 
 
 def get_door_sensor_payload(device_id, device_name, device_model, name):
   return to_json({
-    'availability': get_availability(device_id),
-    'device': get_device(device_id, device_name, device_model),
+    '~': get_base_topic(device_id),
+    'avty_t': get_topic(TOPIC_CONNECTED),
+    'pl_avail': 'true',
+    'pl_not_avail': 'false',
+    'dev': get_device(device_id, device_name, device_model),
     'name': name,
-    'unique_id': device_id+"_door_sensor",
-    'device_class': 'door',
-    'payload_off': str(DOOR_STATE_DOOR_CLOSED),
-    'payload_on': str(DOOR_STATE_DOOR_OPENED),
-    'state_topic': get_topic(device_id, TOPIC_DOOR_SENSOR_STATE),
+    'uniq_id': device_id+"_door_sensor",
+    'dev_cla': 'door',
+    'pl_off': str(DOOR_STATE_DOOR_CLOSED),
+    'pl_on': str(DOOR_STATE_DOOR_OPENED),
+    'stat_t': get_topic(TOPIC_DOOR_SENSOR_STATE),
   })
 
 
 def get_door_sensor_battery_critical_payload(device_id, device_name, device_model, name):
   return to_json({
-    'availability': get_availability(device_id),
-    'device': get_device(device_id, device_name, device_model),
+    '~': get_base_topic(device_id),
+    'avty_t': get_topic(TOPIC_CONNECTED),
+    'pl_avail': 'true',
+    'pl_not_avail': 'false',
+    'dev': get_device(device_id, device_name, device_model),
     'name': name,
-    'unique_id': device_id+"_door_sensor_battery_critical",
-    'device_class': 'battery',
-    'entity_category': 'diagnostic',
-    'state_topic': get_topic(device_id, TOPIC_DOOR_SENSOR_BATTERY_CRITICAL),
-    'payload_off': 'false',
-    'payload_on': 'true'
+    'uniq_id': device_id+"_door_sensor_battery_critical",
+    'dev_cla': 'battery',
+    'ent_cat': 'diagnostic',
+    'stat_t': get_topic(TOPIC_DOOR_SENSOR_BATTERY_CRITICAL),
+    'pl_off': 'false',
+    'pl_on': 'true'
   })
 
 
 def get_keypad_battery_critical_payload(device_id, device_name, device_model, name):
   return to_json({
-    'availability': get_availability(device_id),
-    'device': get_device(device_id, device_name, device_model),
+    '~': get_base_topic(device_id),
+    'avty_t': get_topic(TOPIC_CONNECTED),
+    'pl_avail': 'true',
+    'pl_not_avail': 'false',
+    'dev': get_device(device_id, device_name, device_model),
     'name': name,
-    'unique_id': device_id+"_keypad_battery_critical",
-    'device_class': 'battery',
-    'entity_category': 'diagnostic',
-    'state_topic': get_topic(device_id, TOPIC_KEYPAD_BATTERY_CRITICAL),
-    'payload_off': 'false',
-    'payload_on': 'true'
+    'uniq_id': device_id+"_keypad_battery_critical",
+    'dev_cla': 'battery',
+    'ent_cat': 'diagnostic',
+    'stat_t': get_topic(TOPIC_KEYPAD_BATTERY_CRITICAL),
+    'pl_off': 'false',
+    'pl_on': 'true'
   })
 
 
 def get_button_payload(device_id, device_name, device_model, name, action, action_id):
   return to_json({
-    'availability': get_availability(device_id),
-    'device': get_device(device_id, device_name, device_model),
+    '~': get_base_topic(device_id),
+    'avty_t': get_topic(TOPIC_CONNECTED),
+    'pl_avail': 'true',
+    'pl_not_avail': 'false',
+    'dev': get_device(device_id, device_name, device_model),
     'name': name,
-    'unique_id': device_id+"_"+action_id+"_button",
-    'command_topic': get_topic(device_id, TOPIC_LOCK_ACTION),
-    'payload_press': str(action)
+    'uniq_id': device_id+"_"+action_id+"_button",
+    'cmd_t': get_topic(TOPIC_LOCK_ACTION),
+    'pl_prs': str(action)
   })
 
 
