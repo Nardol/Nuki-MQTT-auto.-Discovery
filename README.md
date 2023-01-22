@@ -42,6 +42,7 @@ data:
 * The smartlock ID is used for entity unique IDs instead of the name which could be changed
 Using this method, if the smartlock is renamed in the Nuki app, the existing entities will be updated instead of create new entities
 * Node ID is not used anymore for MQTT topics
+* MQTT abbreviations are used
 * Locking, unlocking and jammed states are implemented. This change should be visible from Home Assistant 2023.2
 * Open and opening states are removed, these don't exist in Home Assistant for lock entities
 * If the smartlock is unlatching or unlatched, state will be unlocked, the smartlock cannot technically be unlatching or unlatched if it is open so these states are same
