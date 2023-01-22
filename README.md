@@ -48,4 +48,4 @@ Using this method, if the smartlock is renamed in the Nuki app, the existing ent
 * If the smartlock is unlatching or unlatched, state will be unlocked, the smartlock cannot technically be unlatching or unlatched if it is open so these states are same
 * Apply conventional namming for entities, for example the door sensor of the smartlock Front door will be named Front door Door sensor instead of Front door Door Sensor
 * In `python_scripts` directory, there is now a script to remove original device and entities.
-It uses the same parameters you used to add the smartlock entities, `nuki_remove_old` has to be used instead of `nuki_mqtt_discovery` when calling the service
+It uses the same parameters you used to add the smartlock entities, `nuki_remove_old` has to be used instead of `nuki_mqtt_discovery` when calling the service, you must place the `python_scripts/nuki_remove_old.py` to the `python_script` subdirectory of your Home Assistant configuration directory
