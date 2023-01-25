@@ -63,7 +63,7 @@ def to_json(dictionary):
 
 
 def get_discovery_topic(discovery_topic, component, node_id, name):
-  return discovery_topic + "/" + component + "/" + node_id + "_" + name + "/config"
+  return discovery_topic + "/" + component + "/nuki_" + node_id + "_" + name + "/config"
 
 
 def get_base_topic(device_id):
