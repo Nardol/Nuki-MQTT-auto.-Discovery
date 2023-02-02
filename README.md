@@ -22,6 +22,7 @@ Just copy the URL of this repository and add it under HACS --> Custom Repositori
 | discovery_topic | string | No | The home assistant auto. discovery topic (Default: homeassistant) | homeassistant |
 | door_sensor_available | boolean | No | If true, the door sensor data is also discovered (Default: false) | true |
 | keypad_available | boolean | No | 	If true, the keypad data is also discovered (Default: false) | false |
+| remove_lock | boolean | No | 	If true, all MQTT Nuki related topics are removed (Default: false) | false |
 
 ### Example
 

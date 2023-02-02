@@ -5,6 +5,7 @@ DEVICE_MODEL = "device_model"
 DISCOVERY_TOPIC = "discovery_topic"
 DOOR_SENSOR_AVAILABLE = "door_sensor_available"
 KEYPAD_AVAILABLE = "keypad_available"
+REMOVE_LOCK = "remove_lock"
 
 DEFAULT_DISCOVERY_TOPIC = "homeassistant"
 
@@ -239,6 +240,7 @@ def main(hass, data):
   discovery_topic = data.get(DISCOVERY_TOPIC) or DEFAULT_DISCOVERY_TOPIC
   door_sensor_available = data.get(DOOR_SENSOR_AVAILABLE) or False
   keypad_available = data.get(KEYPAD_AVAILABLE) or False
+  remove_lock = data.get(REMOVE_LOCK) or False
 
   if isinstance(device_id, int): # Because of hex device id, always convert it to string
     device_id = str(device_id)
@@ -255,57 +257,60 @@ def main(hass, data):
     logger.error(get_error_message(DEVICE_MODEL, device_model))
     return
 
+  if remove_lock:
+    logger.warning("Uninstalling")
+
   # Lock
   name = device_name
   publish(hass, get_discovery_topic(discovery_topic, "lock", device_id, "lock"),
-    get_lock_payload(device_id, device_name, device_model, name))
+    get_lock_payload(device_id, device_name, device_model, name) if not remove_lock else "")
 
   # Battery critical
   name = device_name + " Battery critical"
   publish(hass, get_discovery_topic(discovery_topic, "binary_sensor", device_id, "lock_battery_critical"), 
-    get_battery_critical_payload(device_id, device_name, device_model, name))
+    get_battery_critical_payload(device_id, device_name, device_model, name) if not remove_lock else "")
 
   # Battery charge state
   name = device_name + " Battery"
   publish(hass, get_discovery_topic(discovery_topic, "sensor", device_id, "battery_percent"),
-    get_battery_charge_state_payload(device_id, device_name, device_model, name))
+    get_battery_charge_state_payload(device_id, device_name, device_model, name) if not remove_lock else "")
 
   # Battery charging
   name = device_name + " Battery charging"
   publish(hass, get_discovery_topic(discovery_topic, "binary_sensor", device_id, "battery_charging"),
-    get_battery_charging_payload(device_id, device_name, device_model, name))
+    get_battery_charging_payload(device_id, device_name, device_model, name) if not remove_lock else "")
 
   if door_sensor_available:
     # Door sensor
     name = device_name + " Door sensor"
     publish(hass, get_discovery_topic(discovery_topic, "binary_sensor", device_id, "door_sensor"),
-      get_door_sensor_payload(device_id, device_name, device_model, name))
+      get_door_sensor_payload(device_id, device_name, device_model, name) if not remove_lock else "")
 
     # Door sensor battery critical
     name = device_name + " Door sensor battery critical"
     publish(hass, get_discovery_topic(discovery_topic, "binary_sensor", device_id, "door_sensor_battery_critical"), 
-      get_door_sensor_battery_critical_payload(device_id, device_name, device_model, name))
+      get_door_sensor_battery_critical_payload(device_id, device_name, device_model, name) if not remove_lock else "")
 
   if keypad_available:
     # Keypad battery critical
     name = device_name + " Keypad battery critical"
     publish(hass, get_discovery_topic(discovery_topic, "binary_sensor", device_id, "keypad_battery_critical"), 
-      get_keypad_battery_critical_payload(device_id, device_name, device_model, name))
+      get_keypad_battery_critical_payload(device_id, device_name, device_model, name) if not remove_lock else "")
 
   # Unlatch button
   name = device_name + " Unlatch"
   publish(hass, get_discovery_topic(discovery_topic, "button", device_id, "unlatch_button"),
-    get_button_payload(device_id, device_name, device_model, name, ACTION_UNLATCH, "unlatch"))
+    get_button_payload(device_id, device_name, device_model, name, ACTION_UNLATCH, "unlatch") if not remove_lock else "")
 
   # Lock'n'Go button
   name = device_name + " Lock-n-Go"
   publish(hass, get_discovery_topic(discovery_topic, "button", device_id, "lockngo_button"),
-    get_button_payload(device_id, device_name, device_model, name, ACTION_LOCKNGO, "lock_n_go"))
+    get_button_payload(device_id, device_name, device_model, name, ACTION_LOCKNGO, "lock_n_go") if not remove_lock else "")
 
   # Lock'n'Go with unlatch button
   name = device_name + " Lock-n-Go with unlatch"
   publish(hass, get_discovery_topic(discovery_topic, "button", device_id, "lock_n_go_unlatch"),
-    get_button_payload(device_id, device_name, device_model, name, ACTION_LOCKNGO_UNLATCH, "lock_n_go_unlatch"))
+    get_button_payload(device_id, device_name, device_model, name, ACTION_LOCKNGO_UNLATCH, "lock_n_go_unlatch") if not remove_lock else "")
 
 
 main(hass, data)
