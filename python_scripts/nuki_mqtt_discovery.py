@@ -77,7 +77,7 @@ def get_topic(topic):
 def get_device(device_id, device_name, device_model):
   return {
     'ids': [
-        device_id
+        "nuki_"+device_id
     ],
     'mf': 'Nuki',
     'name': device_name,
@@ -93,7 +93,7 @@ def get_lock_payload(device_id, device_name, device_model, name):
     'pl_not_avail': 'false',
     'dev': get_device(device_id, device_name, device_model),
     'name': name,
-    'uniq_id': device_id+"_lock",
+    'uniq_id': "nuki_"+device_id+"_lock",
     'cmd_t': get_topic(TOPIC_LOCK_ACTION),
     'pl_lock': str(ACTION_LOCK),
     'pl_unlk': str(ACTION_UNLOCK),
@@ -116,7 +116,7 @@ def get_battery_critical_payload(device_id, device_name, device_model, name):
     'pl_not_avail': 'false',
     'dev': get_device(device_id, device_name, device_model),
     'name': name,
-    'uniq_id': device_id+"_lock_battery_critical",
+    'uniq_id': "nuki_"+device_id+"_lock_battery_critical",
     'dev_cla': 'battery',
     'ent_cat': 'diagnostic',
     'stat_t': get_topic(TOPIC_BATTERY_CRITICAL),
@@ -133,7 +133,7 @@ def get_battery_charge_state_payload(device_id, device_name, device_model, name)
     'pl_not_avail': 'false',
     'dev': get_device(device_id, device_name, device_model),
     'name': name,
-    'uniq_id': device_id+"_lock_battery_percent",
+    'uniq_id': "nuki_"+device_id+"_lock_battery_percent",
     'dev_cla': 'battery',
     'ent_cat': 'diagnostic',
     'stat_t': get_topic(TOPIC_BATTERY_CHARGE_STATE),
@@ -150,7 +150,7 @@ def get_battery_charging_payload(device_id, device_name, device_model, name):
     'pl_not_avail': 'false',
     'dev': get_device(device_id, device_name, device_model),
     'name': name,
-    'uniq_id': device_id+"_battery_charging",
+    'uniq_id': "nuki_"+device_id+"_battery_charging",
     'dev_cla': 'battery_charging',
     'ent_cat': 'diagnostic',
     'stat_t': get_topic(TOPIC_BATTERY_CHARGING),
@@ -167,7 +167,7 @@ def get_door_sensor_payload(device_id, device_name, device_model, name):
     'pl_not_avail': 'false',
     'dev': get_device(device_id, device_name, device_model),
     'name': name,
-    'uniq_id': device_id+"_door_sensor",
+    'uniq_id': "nuki_"+device_id+"_door_sensor",
     'dev_cla': 'door',
     'pl_off': str(DOOR_STATE_DOOR_CLOSED),
     'pl_on': str(DOOR_STATE_DOOR_OPENED),
@@ -183,7 +183,7 @@ def get_door_sensor_battery_critical_payload(device_id, device_name, device_mode
     'pl_not_avail': 'false',
     'dev': get_device(device_id, device_name, device_model),
     'name': name,
-    'uniq_id': device_id+"_door_sensor_battery_critical",
+    'uniq_id': "nuki_"+device_id+"_door_sensor_battery_critical",
     'dev_cla': 'battery',
     'ent_cat': 'diagnostic',
     'stat_t': get_topic(TOPIC_DOOR_SENSOR_BATTERY_CRITICAL),
@@ -200,7 +200,7 @@ def get_keypad_battery_critical_payload(device_id, device_name, device_model, na
     'pl_not_avail': 'false',
     'dev': get_device(device_id, device_name, device_model),
     'name': name,
-    'uniq_id': device_id+"_keypad_battery_critical",
+    'uniq_id': "nuki_"+device_id+"_keypad_battery_critical",
     'dev_cla': 'battery',
     'ent_cat': 'diagnostic',
     'stat_t': get_topic(TOPIC_KEYPAD_BATTERY_CRITICAL),
@@ -217,7 +217,7 @@ def get_button_payload(device_id, device_name, device_model, name, action, actio
     'pl_not_avail': 'false',
     'dev': get_device(device_id, device_name, device_model),
     'name': name,
-    'uniq_id': device_id+"_"+action_id+"_button",
+    'uniq_id': "nuki_"+device_id+"_"+action_id+"_button",
     'cmd_t': get_topic(TOPIC_LOCK_ACTION),
     'pl_prs': str(action)
   })
