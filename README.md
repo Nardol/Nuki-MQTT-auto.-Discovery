@@ -1,5 +1,7 @@
 # Nuki MQTT auto. Discovery
 
+***Warning***: The implementation in the stable Nuki firmware is not the same as the last one of this repository, instead Nuki use the [version 2.0.0](https://github.com/Nardol/Nuki-MQTT-auto.-Discovery/releases/tag/2.0.0) which is also archived in the [current](https://github.com/Nardol/Nuki-MQTT-auto.-Discovery/tree/current) branch.
+
 This repository is a fork of [MattDog06/Nuki-MQTT-auto.-Discovery](https://github.com/MattDog06/Nuki-MQTT-auto.-Discovery)
 
 [![hass_badge](https://img.shields.io/badge/Platform-Home%20Assistant-blue.svg)](https://www.home-assistant.io)
