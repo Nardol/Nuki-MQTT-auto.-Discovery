@@ -1,5 +1,6 @@
 # Nuki MQTT auto. Discovery
 
+This repository is no longer maintained and has been archived. MQTT final has reehashed its final phase and is available in latest stable Firmware for Nuki smart lock 3.0 pro.
 This repository is a fork of [MattDog06/Nuki-MQTT-auto.-Discovery](https://github.com/MattDog06/Nuki-MQTT-auto.-Discovery)
 
 [![hass_badge](https://img.shields.io/badge/Platform-Home%20Assistant-blue.svg)](https://www.home-assistant.io)
